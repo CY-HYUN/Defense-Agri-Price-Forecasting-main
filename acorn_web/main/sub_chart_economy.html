@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="styles/sub_chart_economy.css">
+</head>
+<body>
+    <div class="dashboard">
+        <!-- 왼쪽 네비게이션 바 -->
+        <nav class="sidebar">
+            <h2>농흥회</h2>
+            <ul class="menu">
+                <li data-page="information.html" class="active"><a>품목별 분석</a></li>
+                <li data-page="sub_chart_economy.html"><a>경제 분석</a></li>
+                <!-- <li data-page="sub_chart_oil.html"><a>Oil</a></li> -->
+                <li data-page="sub_chart_weather.html"><a>날씨 분석</a></li>
+                <li data-page="sub_chart_logistics.html"><a>출하량 분석</a></li>
+                <li data-page="menu_management.html"><a>육군 훈련소 메뉴 분석</a></li>
+                <li data-page="main_dashboard.html">품목별 예측</li>
+            </ul>
+        </nav>
+
+        <!-- 메인 콘텐츠 -->
+        <main class="content">
+            <div class="chart" id="economy-chart">
+                <iframe id="economy-iframe" width="100%" height="850" frameborder="0" allowFullScreen="true"></iframe>
+            </div>
+        </main>
+    </div>
+
+    <!-- JavaScript 파일 연결 -->
+    <script src="scripts/navigation.js"></script>
+    <script src="scripts/sub_chart_economy.js"></script>
+</body>
+</html>

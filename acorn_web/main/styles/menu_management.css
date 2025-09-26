@@ -1,0 +1,178 @@
+/* 전체 레이아웃 */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    display: flex;
+    height: 100vh;
+    background-color: #f5f5f5;
+}
+
+.dashboard {
+    display: grid;
+    grid-template-columns: 250px 1fr;
+    height: 100%;
+    width: 100%;
+}
+
+/* 사이드바 스타일 */
+.sidebar {
+    background-color: #001730;
+    padding: 20px;
+    color: white;
+    text-align: center;
+    position: relative; /* button-group의 기준점으로 설정 */
+}
+
+.sidebar h2 {
+    margin-bottom: 20px;
+    font-size: 1.5em;
+}
+
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    margin: 15px 0;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.sidebar ul li.active {
+    font-weight: bold;
+    background-color: #007bff;
+    color: #fff;
+}
+
+.sidebar ul li:hover {
+    background-color: #0056b3;
+    color: #fff;
+}
+
+/* 메인 콘텐츠 */
+.content {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    background-color: #f9f9f9;
+}
+
+
+/* 차트 섹션 */
+.charts {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* 각 차트 스타일 */
+.chart {
+    background-color: #fff;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+/* 차트 캔버스 스타일 */
+.chart canvas {
+    display: block;
+    margin: 0 auto;
+    max-width: 100%;
+}
+
+/* 사이드바 하단 섹션 */
+.footer {
+    margin-top: 20px;
+    font-size: 0.9em;
+    color: white;
+    text-align: center;
+}
+
+h1 {
+    margin: 0;
+    font-size: 24px;
+}
+
+/* 네비게이션 메뉴 스타일 */
+nav {
+    background-color: #444;
+    padding: 10px 20px;
+}
+
+.sub-menu li {
+    margin: 0;
+    padding: 10px 15px;
+    white-space: nowrap;
+}
+
+.sub-menu li a {
+    color: #fff;
+    font-size: 10px;
+    text-align: left;
+}
+
+.sub-menu li a:hover {
+    text-decoration: underline;
+}
+
+h3 {
+    position: absolute; /* 부모(main-chart) 기준으로 위치 설정 */
+    top: 38%; /* 화면 상단에서 20px 떨어짐 */
+    left: 25%; /* 화면 오른쪽에서 20px 떨어짐 */
+    transform: translate(-50%, -50%); /* 정확히 중앙에 위치 */
+    display: flex;
+    flex-direction: column; /* 버튼을 세로로 배치 */
+    gap: 10px;
+    z-index: 10; /* iframe 위로 올라오도록 설정 */
+    background-color: #fff;
+}
+
+/* 버튼 그룹 */
+.button-group {
+    position: absolute; /* 부모 기준으로 위치 설정 */
+    top: 48%; /* 화면 상단에서 50% 아래로 이동 */
+    left: 45%; /* 화면 왼쪽에서 50% 오른쪽으로 이동 */
+    transform: translate(-50%, -50%); /* 정확히 중앙에 위치 */
+    display: flex;
+    flex-direction: row; /* 버튼을 가로로 배치 */
+    gap: 10px; /* 버튼 간 간격 설정 */
+    z-index: 10; /* iframe 위로 올라오도록 설정 */
+    width: 80vw; /* 화면의 80% 너비로 설정 */
+    max-width: 900px; /* 최대 너비를 900px로 설정 */
+}
+
+.button-group button {
+    padding: 0; /* 내부 여백 제거 */
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    width: 15vw; /* 버튼 너비를 화면 너비에 비례하게 설정 */
+    height: 15vw; /* 버튼 높이를 화면 너비에 비례하게 설정 */
+    max-width: 150px; /* 버튼의 최대 너비 설정 */
+    max-height: 80px; /* 버튼의 최대 높이 설정 */
+    display: flex; /* 이미지 중앙 정렬 */
+    justify-content: center; /* 수평 중앙 정렬 */
+    align-items: center; /* 수직 중앙 정렬 */
+    overflow: hidden; /* 이미지가 버튼 밖으로 나가지 않게 */
+}
+
+.button-group button img {
+    width: 100%; /* 버튼에 맞게 이미지 조정 */
+    height: 100%; /* 비율 유지 */
+    object-fit: cover; /* 비율 유지하면서 버튼에 맞춤 */
+    pointer-events: none; /* 이미지를 클릭하지 못하게 설정 */
+}
+  
+.button-group button:hover {
+    background-color: #ddd;
+}
+
+/* Iframe 스타일 */
+iframe {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}

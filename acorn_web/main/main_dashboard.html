@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main Dashboard</title>
+    <link rel="stylesheet" href="styles/main_dashboard.css">
+</head>
+<body>
+    <div class="dashboard">
+        <!-- 왼쪽 네비게이션 바 -->
+        <nav class="sidebar">
+            <h2>농흥회</h2>
+            <ul class="menu">
+                <li data-page="information.html" class="active"><a>품목별 분석</a></li>
+                <li data-page="sub_chart_economy.html"><a>경제 분석</a></li>
+                <!-- <li data-page="sub_chart_oil.html"><a>Oil</a></li> -->
+                <li data-page="sub_chart_weather.html"><a>날씨 분석</a></li>
+                <li data-page="sub_chart_logistics.html"><a>출하량 분석</a></li>
+                <li data-page="menu_management.html"><a>육군 훈련소 메뉴 분석</a></li>
+                <li data-page="main_dashboard.html">품목별 예측</li>
+            </ul>
+        </nav>
+
+        <!-- 메인 컨텐츠 -->
+        <main class="content">
+            <div class="iframe-container">
+                <!-- LSTM 및 SARIMAX 차트 -->
+                <iframe id="lstm-sarimax-iframe" width="100%" height="900" frameborder="0" allowFullScreen="true"></iframe>
+            </div>
+        </main>
+    </div>
+
+    <!-- JavaScript 연결 -->
+    <script src="scripts/main_dashboard.js"></script>
+    <script src="scripts/navigation.js"></script>
+</body>
+</html>

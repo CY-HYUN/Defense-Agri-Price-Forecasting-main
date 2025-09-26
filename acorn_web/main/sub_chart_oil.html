@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="styles/sub_chart_oil.css">
+</head>
+<body>
+    <div class="dashboard">
+        <!-- 왼쪽 네비게이션 바 -->
+        <nav class="sidebar">
+            <h2>농흥회</h2>
+            <ul class="menu">
+                <li data-page="main_dashboard.html" class="active">Main Dashboard</li>
+                <li>
+                    Sub Chart
+                    <ul class="sub-menu">
+                        <li data-page="sub_chart_economy.html"><a>Economy</a></li>
+                        <!-- <li data-page="sub_chart_oil.html"><a>Oil</a></li> -->
+                        <li data-page="sub_chart_weather.html"><a>Weather</a></li>
+                        <li data-page="sub_chart_logistics.html"><a>Logistics</a></li>
+                    </ul>
+                </li>
+                <li data-page="menu_management.html"><a>Menu Management</a></li>
+                <li data-page="EDA.html"><a>EDA</a></li>
+            </ul>
+            <div class="footer">
+                <p>대표전화는?</p>
+                <p>1577-1577</p>
+            </div>
+        </nav>
+
+        <!-- 메인 콘텐츠 -->
+        <main class="content">
+            <header>
+                <h1>Sub Chart - Oil</h1>
+                <h4>이 화면은 Main Dashboard에 있는 정보들을 예측하기 위해 사용되었던 유가 지표들을 제공하는 페이지 입니다.</h4>
+            </header>
+
+            <!-- Oil Change 차트 -->
+            <div class="chart" id="oil-change-chart">
+                <h3>Oil Change Chart</h3>
+                <iframe id="oil-change-iframe" width="100%" height="250" frameborder="0" allowFullScreen="true"></iframe>
+            </div>
+            
+            <!-- Oil month 차트 -->
+            <div class="chart" id="oil-month-chart">
+                <h3>Oil Month Chart</h3>
+                <iframe id="oil-month-iframe" width="100%" height="250" frameborder="0" allowFullScreen="true"></iframe>
+            </div>
+        </main>
+    </div>
+
+    <!-- JavaScript 파일 연결 -->
+    <script src="scripts/navigation.js"></script>
+    <script src="scripts/sub_chart_oil.js"></script>
+</body>
+</html>
+
