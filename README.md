@@ -11,7 +11,6 @@ An intelligent forecasting system designed to predict agricultural commodity pri
 - [Key Features](#key-features)
 - [System Architecture](#system-architecture)
 - [Technology Stack](#technology-stack)
-- [Project Structure](#project-structure)
 - [Data Sources](#data-sources)
 - [Modeling Approach](#modeling-approach)
 - [Installation & Setup](#installation--setup)
