@@ -287,16 +287,10 @@ Open any of the EDA notebooks to explore:
 This project was developed as part of a defense procurement optimization initiative.
 
 **Team Members:**
-- Data Engineering & Preprocessing
-- Machine Learning & Model Development
+- Data Engineering & Preprocessing(Changyong Hyun)
+- Machine Learning & Model Development(Changyong Hyun)
 - Web Development & Dashboard
-- Data Analysis & Visualization
-
----
-
-## License
-
-This project is developed for educational and research purposes.
+- Data Analysis & Visualization(Changyong Hyun)
 
 ---
 
@@ -305,14 +299,3 @@ This project is developed for educational and research purposes.
 - **Data Sources**: Korea Agro-Fisheries & Food Trade Corporation, Bank of Korea, Korea Meteorological Administration
 - **Research References**: Various academic papers on agricultural price forecasting using LSTM and time series analysis
 - **Framework Credits**: TensorFlow, Flask, Power BI
-
----
-
-## Contact & Support
-
-For questions, issues, or contributions, please open an issue in this repository.
-
----
-
-**Last Updated**: December 2024
-
