@@ -3033,72 +3033,7 @@ Defense-Agri-Price-Forecasting/
 
 ---
 
-## 🤝 Contributing
-
-We welcome contributions! Here's how you can help:
-
-### Reporting Issues
-
-Found a bug or have a feature request?
-
-1. Check [existing issues](https://github.com/yourusername/Defense-Agri-Price-Forecasting/issues)
-2. If not found, [create a new issue](https://github.com/yourusername/Defense-Agri-Price-Forecasting/issues/new)
-3. Provide:
-   - Clear description
-   - Steps to reproduce (for bugs)
-   - Expected vs. actual behavior
-   - Screenshots (if applicable)
-
-### Pull Requests
-
-Want to contribute code?
-
-1. **Fork the repository**
-2. **Create a feature branch**:
-   ```bash
-   git checkout -b feature/amazing-feature
-   ```
-3. **Make your changes**
-4. **Add tests** (if applicable)
-5. **Commit with clear messages**:
-   ```bash
-   git commit -m "Add amazing feature: brief description"
-   ```
-6. **Push to your fork**:
-   ```bash
-   git push origin feature/amazing-feature
-   ```
-7. **Open a Pull Request** with:
-   - Description of changes
-   - Why this change is needed
-   - Any breaking changes
-   - Screenshots (if UI changes)
-
-### Development Guidelines
-
-**Code Style**:
-- Follow [PEP 8](https://pep8.org/) for Python
-- Use meaningful variable names
-- Add docstrings to functions
-- Keep functions < 50 lines
-
-**Testing**:
-```bash
-# Run unit tests
-pytest tests/
-
-# Check code coverage
-pytest --cov=. tests/
-```
-
-**Documentation**:
-- Update README.md if adding features
-- Add docstrings to new functions
-- Update API_REFERENCE.md for API changes
-
----
-
-## 📚 References & Acknowledgments
+## 📚 References
 
 ### Academic Papers
 
@@ -3120,12 +3055,6 @@ pytest --cov=. tests/
 - **Flask**: Web application framework
 - **Power BI**: Business intelligence and visualization
 - **Pandas, NumPy, Scikit-learn**: Data processing and ML utilities
-
-### Special Thanks
-
-- **Acorn Academy**: Training and project support
-- **Korean Ministry of National Defense**: Problem statement and domain expertise
-- **Open Source Community**: Contributors to all the amazing libraries we used
 
 ---
 
