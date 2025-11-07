@@ -20,12 +20,10 @@
 7. [Machine Learning Models](#-machine-learning-models)
 8. [Web Application](#-web-application)
 9. [Visualization & Results](#-visualization--results)
-10. [Installation & Setup](#-installation--setup)
 11. [Project Structure](#-project-structure)
 12. [Technologies & Tools](#-technologies--tools)
 13. [Key Achievements](#-key-achievements)
 14. [Future Enhancements](#-future-enhancements)
-15. [References](#-references)
 
 ---
 
@@ -75,20 +73,6 @@ This project develops an **end-to-end AI-powered forecasting system** that:
 - **Deliverables**: 50+ Jupyter notebooks, Flask web app, Power BI dashboards, comprehensive documentation
 
 ---
-
-## 👥 Team Composition
-
-### Team Structure
-
-| Name | Role | Key Responsibilities | Technical Contributions |
-|------|------|---------------------|------------------------|
-| **윤찬열** | Team Leader | Project coordination, LSTM modeling, documentation | - Designed 3-layer LSTM architecture with dropout regularization<br>- Implemented early stopping and model checkpointing<br>- Coordinated weekly deliverables and presentations |
-| **이현동** | Deputy Leader | SARIMAX modeling, web development, data preprocessing | - Developed SARIMAX model with seasonal parameters (1,1,1,52)<br>- Built Flask web application with 6 specialized dashboards<br>- Created automated preprocessing pipelines |
-| **홍동균** | Designer & BI Analyst | Power BI dashboards, UI/UX design, data visualization | - Designed professional Power BI reports with custom DAX measures<br>- Created Figma prototypes for web interface<br>- Developed consistent color schemes and design system |
-| **이상윤** | Data Engineer | ERD design, database architecture, EDA | - Designed relational database ERD with 10+ tables<br>- Conducted comprehensive EDA identifying seasonal patterns<br>- Documented data dictionary and schema specifications |
-| **권오윤** | ML Engineer | LSTM optimization, hyperparameter tuning | - Optimized LSTM hyperparameters (learning rate, batch size, epochs)<br>- Implemented data augmentation with rolling windows<br>- Evaluated models with multiple performance metrics (RMSE, MAE, MAPE) |
-| **정태빈** | Data Analyst | Domain research, EDA, statistical analysis | - Analyzed cabbage price patterns by harvest period<br>- Investigated regional weather correlations<br>- Conducted hypothesis testing and statistical inference |
-| **부혁훈** | DevOps Engineer | Server infrastructure, automation scripts | - Set up Ubuntu-based big data processing server<br>- Automated CSV file transfers with Bash/PowerShell scripts<br>- Configured scheduled cron jobs for daily data updates |
 
 ### Collaboration & Workflow
 
@@ -1719,10 +1703,6 @@ This project implements **two complementary forecasting approaches**:
 
 **Primary Notebook**: `가격예측 AI 모델링/latest_lstm_prediction.ipynb` (4.7 MB - comprehensive implementation)
 
-**LSTM Layer Visualization**:
-
-![LSTM_layer](https://github.com/user-attachments/assets/LSTM_layer.png)
-
 ### Model Architecture Details
 
 #### Layer Configuration
@@ -1773,16 +1753,6 @@ model.compile(
 | Dense | Dense | 1 | (batch, 1) | 33 | Price prediction |
 
 **Total Parameters**: ~127K trainable parameters
-
-**LSTM Code Visualization**:
-
-![LSTM_code](https://github.com/user-attachments/assets/LSTM_code.png)
-
-### Input Data Preparation
-
-**Data Reading & Preprocessing**:
-
-![dataread_preprocessing](https://github.com/user-attachments/assets/dataread_preprocessing.png)
 
 **Sequence Creation**:
 
@@ -1906,16 +1876,6 @@ Epoch 43/100 (Best model - validation loss stopped improving)
 - **Validation MAPE**: 4.5%
 
 **Interpretation**: Model achieves **~95.5% accuracy** (100% - 4.5% MAPE) on validation set.
-
-### Prediction Results
-
-**LSTM Predictions Visualization**:
-
-![LSTM_predict_graph](https://github.com/user-attachments/assets/LSTM_predict_graph.png)
-
-**Actual vs Predicted Comparison**:
-
-![actual_predict_graph](https://github.com/user-attachments/assets/actual_predict_graph.png)
 
 **Test Set Performance**:
 
@@ -2705,179 +2665,6 @@ embed_url = f"{base_url}?reportId={report_id}&autoAuth={auto_auth}&ctid={tenant_
 
 ---
 
-### Deployment Guide
-
-#### Local Development
-
-**Step 1: Clone Repository**
-```bash
-git clone https://github.com/yourusername/Defense-Agri-Price-Forecasting.git
-cd Defense-Agri-Price-Forecasting/acorn_web
-```
-
-**Step 2: Install Dependencies**
-```bash
-pip install -r requirements.txt
-```
-
-**Requirements** (`requirements.txt`):
-```txt
-Flask==2.0.3
-pandas==1.4.2
-matplotlib==3.5.2
-numpy==1.22.4
-```
-
-**Step 3: Run Flask Server**
-```bash
-python app.py
-```
-
-**Output**:
-```
- * Serving Flask app 'app' (lazy loading)
- * Environment: production
-   WARNING: This is a development server. Do not use it in a production deployment.
-   Use a production WSGI server instead.
- * Debug mode: on
- * Running on http://127.0.0.1:5000 (Press CTRL+C to quit)
-```
-
-**Step 4: Access Dashboard**
-
-Open browser and navigate to:
-- **Main Dashboard**: `http://localhost:5000/`
-- **Economy Dashboard**: `http://localhost:5000/sub_chart_economy`
-- **Weather Dashboard**: `http://localhost:5000/sub_chart_weather`
-- **Logistics Dashboard**: `http://localhost:5000/sub_chart_logistics`
-- **Oil Dashboard**: `http://localhost:5000/sub_chart_oil`
-- **Menu Management**: `http://localhost:5000/menu_management`
-
----
-
-#### Production Deployment
-
-**Option 1: Gunicorn (Linux/Mac)**
-
-```bash
-# Install Gunicorn
-pip install gunicorn
-
-# Run with 4 worker processes
-gunicorn --workers=4 --bind=0.0.0.0:8000 app:app
-```
-
-**Option 2: Waitress (Windows)**
-
-```bash
-# Install Waitress
-pip install waitress
-
-# Run production server
-waitress-serve --port=8000 app:app
-```
-
-**Option 3: Docker Container**
-
-**Dockerfile**:
-```dockerfile
-FROM python:3.9-slim
-
-WORKDIR /app
-
-# Copy files
-COPY acorn_web/ /app/
-COPY requirements.txt /app/
-
-# Install dependencies
-RUN pip install --no-cache-dir -r requirements.txt
-
-# Expose port
-EXPOSE 5000
-
-# Run Flask
-CMD ["python", "app.py"]
-```
-
-**Build and Run**:
-```bash
-docker build -t agri-price-forecast .
-docker run -p 5000:5000 agri-price-forecast
-```
-
-**Option 4: Cloud Deployment**
-
-**AWS Elastic Beanstalk**:
-```bash
-eb init -p python-3.9 agri-forecast-app
-eb create agri-forecast-env
-eb deploy
-```
-
-**Heroku**:
-```bash
-heroku create agri-price-forecast
-git push heroku main
-heroku open
-```
-
-**Azure App Service**:
-```bash
-az webapp up --name agri-forecast --runtime "PYTHON:3.9"
-```
-
----
-
-### System Requirements
-
-**Minimum**:
-- **CPU**: 2 cores
-- **RAM**: 4 GB
-- **Disk**: 10 GB
-- **Python**: 3.8+
-- **Browser**: Chrome 90+, Firefox 88+, Safari 14+
-
-**Recommended** (for production):
-- **CPU**: 4+ cores
-- **RAM**: 8+ GB
-- **Disk**: 20+ GB SSD
-- **Python**: 3.9+
-- **Reverse Proxy**: Nginx or Apache
-- **SSL Certificate**: Let's Encrypt
-- **CDN**: CloudFlare or AWS CloudFront
-
----
-
-### Security Considerations
-
-**Authentication** (Future Enhancement):
-```python
-from flask import session, redirect, url_for
-from functools import wraps
-
-def login_required(f):
-    @wraps(f)
-    def decorated_function(*args, **kwargs):
-        if 'user_id' not in session:
-            return redirect(url_for('login'))
-        return f(*args, **kwargs)
-    return decorated_function
-
-@app.route('/dashboard')
-@login_required
-def dashboard():
-    return render_template('main_dashboard.html')
-```
-
-**Best Practices**:
-- ✅ **HTTPS Only**: Encrypt all traffic with SSL/TLS
-- ✅ **CSRF Protection**: Use Flask-WTF for form validation
-- ✅ **Rate Limiting**: Prevent DDoS with Flask-Limiter
-- ✅ **Input Sanitization**: Validate all user inputs
-- ✅ **Environment Variables**: Store secrets in `.env` files
-
----
-
 ## 📊 Results & Performance Analysis
 
 ### Model Performance Summary
@@ -3120,178 +2907,6 @@ shap.summary_plot(shap_values, X_test[:100], feature_names=feature_names)
 
 ---
 
-### Feature Roadmap
-
-#### Q1 2025
-- [ ] Deploy Transformer model for top 5 commodities
-- [ ] Implement real-time data pipeline (hourly updates)
-- [ ] Add SHAP explainability to dashboard
-- [ ] User authentication & role-based access control
-
-#### Q2 2025
-- [ ] Expand to 30+ commodities (fruits, grains, meats)
-- [ ] Multi-region forecasting (Busan, Daegu markets)
-- [ ] Mobile app (iOS/Android)
-- [ ] API for third-party integrations
-
-#### Q3 2025
-- [ ] Recommendation system (optimal procurement timing)
-- [ ] Budget optimization tool (automated PO generation)
-- [ ] Supplier performance tracking
-- [ ] Contract pricing analysis
-
-#### Q4 2025
-- [ ] International market integration
-- [ ] Blockchain supply chain tracking
-- [ ] Carbon footprint calculator
-- [ ] Advanced analytics (prescriptive modeling)
-
----
-
-## 🛠️ Installation & Setup
-
-### Prerequisites
-
-**System Requirements**:
-- **OS**: Windows 10/11, macOS 10.15+, Ubuntu 20.04+
-- **Python**: 3.8, 3.9, 3.10, or 3.11
-- **RAM**: Minimum 8 GB (16 GB recommended for model training)
-- **Disk Space**: 50 GB (includes data + models)
-- **GPU**: NVIDIA GPU with CUDA 11.8+ (optional, 5x faster training)
-
-**Software Dependencies**:
-- Git
-- Anaconda or Miniconda (recommended) OR pip
-
----
-
-### Step-by-Step Installation
-
-#### 1. Clone Repository
-
-```bash
-# Clone via HTTPS
-git clone https://github.com/yourusername/Defense-Agri-Price-Forecasting.git
-
-# Or clone via SSH
-git clone git@github.com:yourusername/Defense-Agri-Price-Forecasting.git
-
-# Navigate to project directory
-cd Defense-Agri-Price-Forecasting
-```
-
-#### 2. Create Virtual Environment
-
-**Option A: Conda (Recommended)**
-```bash
-# Create environment with Python 3.9
-conda create -n agri-forecast python=3.9
-
-# Activate environment
-conda activate agri-forecast
-```
-
-**Option B: venv**
-```bash
-# Create virtual environment
-python -m venv venv
-
-# Activate (Windows)
-venv\Scripts\activate
-
-# Activate (Mac/Linux)
-source venv/bin/activate
-```
-
-#### 3. Install Dependencies
-
-**Core ML Libraries**:
-```bash
-# TensorFlow with GPU support
-pip install tensorflow==2.12.0
-
-# Or TensorFlow CPU-only (smaller download)
-pip install tensorflow-cpu==2.12.0
-
-# Statistical models
-pip install statsmodels==0.14.0
-
-# Data processing
-pip install pandas==1.5.3 numpy==1.24.3 scikit-learn==1.2.2
-
-# Visualization
-pip install matplotlib==3.7.1 seaborn==0.12.2
-```
-
-**Web Application**:
-```bash
-cd acorn_web
-pip install -r requirements.txt
-```
-
-**All Dependencies** (single command):
-```bash
-pip install -r requirements_full.txt
-```
-
-#### 4. Download Data
-
-**Option A: From Repository** (if data is included):
-```bash
-# Data is included in the repo (DB/ folder)
-# No additional download needed
-```
-
-**Option B: From External Source** (if data is hosted separately):
-```bash
-# Download from Google Drive / OneDrive / AWS S3
-# (Provide actual link if applicable)
-python scripts/download_data.py
-```
-
-**Verify Data**:
-```bash
-python scripts/verify_data.py
-
-# Expected output:
-# ✓ DB/식품예측 독립변수 데이터/ (100+ files)
-# ✓ EDA(탐색적 데이터 분석)/ (notebooks)
-# ✓ 가격예측 AI 모델링/ (trained models)
-```
-
-#### 5. Train Models (Optional)
-
-**Train LSTM** (takes ~2-3 hours):
-```bash
-cd "가격예측 AI 모델링"
-python train_lstm.py --commodity "Korean Cabbage" --epochs 100
-```
-
-**Train SARIMAX** (takes ~30 minutes):
-```bash
-python train_sarimax.py --commodity "Korean Cabbage" --seasonal_periods 52
-```
-
-**Use Pre-trained Models** (faster):
-```bash
-# Pre-trained models are included in:
-# 가격예측 AI 모델링/models/
-# No training needed!
-```
-
-#### 6. Run Web Application
-
-```bash
-cd acorn_web
-python app.py
-```
-
-**Access Dashboard**:
-- Open browser: `http://localhost:5000`
-- Enjoy! 🎉
-
----
-
 ## 📁 Project Structure
 
 ```
@@ -3483,41 +3098,6 @@ pytest --cov=. tests/
 
 ---
 
-## 📜 License
-
-This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) file for details.
-
-**TL;DR**: You can freely use, modify, and distribute this software for any purpose, including commercial use, as long as you include the original copyright notice.
-
----
-
-## 👥 Team & Contact
-
-### Project Team
-
-**Team Name**: 농흥회 (Nong-Heung-Hoe / Agricultural Prosperity Society)
-
-**Team Members** (5 people):
-
-| Name | Role | Responsibilities | GitHub |
-|------|------|------------------|--------|
-| **Lee Hyun-Dong** | Team Leader, ML Engineer | SARIMAX modeling, project management | [@username](https://github.com/username) |
-| **Kim Ji-Soo** | Data Scientist | Data preprocessing, feature engineering | [@username](https://github.com/username) |
-| **Park Min-Ji** | ML Engineer | LSTM implementation, model optimization | [@username](https://github.com/username) |
-| **Choi Seung-Ho** | Full-Stack Developer | Flask backend, Power BI integration | [@username](https://github.com/username) |
-| **Jung Soo-Bin** | Data Analyst | EDA, visualization, business analysis | [@username](https://github.com/username) |
-
-### Contact
-
-**Questions? Suggestions? Collaborations?**
-
-- 📧 **Email**: team@agri-forecast.com
-- 💼 **LinkedIn**: [Project LinkedIn](#)
-- 🐛 **Issues**: [GitHub Issues](https://github.com/yourusername/Defense-Agri-Price-Forecasting/issues)
-- 💬 **Discussions**: [GitHub Discussions](https://github.com/yourusername/Defense-Agri-Price-Forecasting/discussions)
-
----
-
 ## 📚 References & Acknowledgments
 
 ### Academic Papers
@@ -3549,51 +3129,7 @@ This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) 
 
 ---
 
-## 📈 Project Statistics
-
-- **Lines of Code**: 15,000+ (Python, JavaScript, HTML/CSS)
-- **Data Points**: 1.2 million+ (10 years × 15 commodities × daily records)
-- **Features Engineered**: 100+
-- **Models Trained**: 30 (15 commodities × 2 models)
-- **Visualizations Created**: 50+
-- **Development Time**: 3 months (Aug-Oct 2024)
-- **Team Size**: 5 members
-- **GitHub Stars**: ⭐ (Give us a star if you find this useful!)
-
----
-
-## 🌟 Show Your Support
-
-If this project helped you or you found it interesting:
-
-- ⭐ **Star this repository** on GitHub
-- 🍴 **Fork it** to build something amazing
-- 📢 **Share it** with your network
-- 💬 **Provide feedback** via issues/discussions
-- 🤝 **Contribute** by submitting PRs
-
----
-
-## 🔖 Version History
-
-### v1.0.0 (October 2024)
-- ✅ Initial release
-- ✅ LSTM & SARIMAX models for 15 commodities
-- ✅ Flask web application with 6 dashboards
-- ✅ Power BI integration
-- ✅ Comprehensive EDA & documentation
-
-### v1.1.0 (Planned - Q1 2025)
-- 🔄 Transformer model integration
-- 🔄 Real-time data pipeline
-- 🔄 SHAP explainability
-- 🔄 Mobile app (iOS/Android)
-
----
-
 <div align="center">
-
-**Made with ❤️ by Team 농흥회**
 
 [⬆ Back to Top](#defense-agricultural-price-forecasting-system)
 
