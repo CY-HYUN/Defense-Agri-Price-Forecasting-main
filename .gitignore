@@ -1,2 +1,6 @@
 *.csv
-*.csv
+
+# PowerPoint files
+PT/
+*.ppt
+*.pptx
