@@ -5,3 +5,6 @@ PT/
 *.ppt
 *.pptx
 .claude/
+
+# Jupyter autosave copies
+.ipynb_checkpoints/
