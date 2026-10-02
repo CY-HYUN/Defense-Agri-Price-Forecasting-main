@@ -1,0 +1,7 @@
+# Flask dashboard (acorn_web/app.py) — verified minimal set
+flask
+pandas
+matplotlib
+
+# Extras needed to open/run the analysis notebooks (heavier; install only if needed):
+#   pip install jupyter statsmodels scikit-learn tensorflow openpyxl xlrd
