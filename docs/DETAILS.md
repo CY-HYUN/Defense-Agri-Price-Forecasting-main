@@ -40,15 +40,15 @@ Notebooks under `전처리 부분/`, `EDA(탐색적 데이터 분석)/전처리/
 
 One univariate model per commodity (average daily price only):
 
-- Chronological 80/20 train/test split; sliding-window supervised framing with `time_step` tuned per commodity (10-30)
+- MinMax scaler fitted on each full series, then a chronological 80/20 train/test split; sliding-window supervised framing with `time_step` tuned per commodity (10-30)
 - Architecture: `LSTM(200) → LSTM(100) → LSTM(50) → LSTM(50) → LSTM(100) → LSTM(200) → Dense(1)`, all LSTM layers `tanh` with `kernel_regularizer=l2(0.01)` and `Dropout(0.2)` after each
-- Loss: custom RMSE on scaled values; metric: MAE; optimizer: Adam with per-commodity learning rate; `EarlyStopping(monitor='val_loss', patience=10, restore_best_weights=True)`; batch size 50; up to 100 epochs; seeds fixed (42)
-- Forecasting: recursive one-step-ahead rollout for 30- and 365-day horizons
+- Loss: custom RMSE on scaled values; metric: MAE; optimizer: Adam with per-commodity learning rate; `EarlyStopping(monitor='val_loss', patience=10, restore_best_weights=True)` with `validation_data=(X_test, y_test)`, so the 20% test split also chose the stopping epoch; batch size 50; up to 100 epochs; seeds fixed (42)
+- Forecasting: recursive one-step-ahead rollout over a 30-day horizon (`future_days = 30` in every block; some plot titles say 365 days)
 - Environment: Google Colab GPU (`/content/...` data paths preserved in the notebook)
 
 ### Per-commodity training results (best epoch by validation loss, min-max-scaled units)
 
-Extracted from the training logs saved in the notebook outputs. Validation loss is RMSE on scaled prices; MAE is on the same 0–1 scale, so 0.05 ≈ 5% of that commodity's 2014–2024 price range.
+Extracted from the training logs saved in the notebook outputs. The "validation" set is the 20% test split, which also picked the epoch, so these are optimistic estimates. No last-value or seasonal-naive baseline was scored. Validation loss is RMSE on scaled prices; MAE is on the same 0–1 scale, so 0.05 ≈ 5% of that commodity's 2014–2024 price range.
 
 | Commodity | Learning rate | Best val RMSE | Best val MAE |
 | --- | --- | --- | --- |
@@ -68,7 +68,8 @@ Extracted from the training logs saved in the notebook outputs. Validation loss 
 | Cucumber (오이) | 0.0009 | 0.109 | 0.086 |
 | King oyster mushroom (새송이버섯) | 0.0005 | 0.119 | 0.092 |
 | Bean sprouts (콩나물) | 0.0009 | 0.138 | 0.094 |
-| Cabbage (양배추) | 0.0028 | — (fit-cell output not preserved) | — |
+
+The notebook's 17th block is headed cabbage (양배추), but it filters the price file on 감자 (potato), so its model is fitted on the potato series; its fit-cell output was not preserved. Cabbage has no LSTM result in this repository.
 
 Median best val MAE across the 16 logged models: **0.044**. No test-set MAPE/R² in currency units is preserved in the repo, so none is claimed.
 
@@ -78,7 +79,8 @@ Result graphs committed alongside the notebook: `actual_predict_graph.png` (test
 
 - Daily average prices → weekly means; missing weeks detected and excluded
 - Model: statsmodels `SARIMAX(weekly_prices, order=(5, 1, 0), seasonal_order=(1, 1, 1, 52))` — seasonal ARIMA with a 52-week cycle; **no exogenous regressors passed** in the final batch run (the class name is SARIMAX, the fitted models are SARIMA)
-- ADF stationarity testing before differencing decisions
+- One differencing step in the non-seasonal and the seasonal part; `adfuller` (ADF stationarity test) is imported but not called in the committed notebooks
+- Fitted on the full weekly series and not scored against held-out weeks
 - Batch loop over the per-commodity files produced 52-week-ahead forecasts, saved as `<commodity>_predictions.csv` under `DB/예측한 값 저장/` (napa cabbage, cabbage, carrot, cucumber, radish, garlic, onion, pepper, potato, rice, spinach, green onion) plus combined past+predicted files — note these CSVs are excluded from the public repo by `.gitignore`
 - Historical + forecast series were exported for Power BI (`EDA(탐색적 데이터 분석)/PowerBI에서참고할csv파일만들기.ipynb`)
 
